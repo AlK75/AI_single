@@ -26,8 +26,8 @@ view: beacondpuniquevisits_single {
     sql: ${TABLE}.uniquevisits ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+ measure: count_UniqueVisits {
+  type: sum
+  sql: ${TABLE}.uniquevisits ;;
+}
 }

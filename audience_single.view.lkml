@@ -1,4 +1,4 @@
-view: geovisits_single {
+view: Audience_single {
   sql_table_name: looker_pub1.geovisits_single ;;
 
   dimension: beaconid {
@@ -34,10 +34,5 @@ view: geovisits_single {
   dimension: siteid {
     type: string
     sql: ${TABLE}.siteid ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: []
   }
 }

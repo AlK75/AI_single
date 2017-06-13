@@ -31,22 +31,65 @@ view: beaconweeklyvisits_single {
     sql: ${TABLE}.visitcount ;;
   }
 
-  dimension_group: weeknum {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
+  dimension: weeknum {
+    type: date_week
     sql: ${TABLE}.weeknum ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
+  measure: count_TotalVisits {
+
+    type: sum
+    sql:  ${TABLE}.visitcount ;;
+  }
+
+  measure: count_TotalBeaconUniqueDevices {
+    type: sum
+    sql:  ${TABLE}.beaconuniquedevices ;;
+  }
+
+  measure: count_MobileVisits {
+    type: sum
+    sql:  ${TABLE}.visitcount ;;
+    filters: {
+      field: devicetype.name
+      value: "mobile,smartphone,smallscreen,smartwatch"
+    }
+  }
+
+  measure: percent_MobileVisits {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_MobileVisits} / NULLIF(${count_TotalVisits},0) ;;
+  }
+
+  measure: count_DesktopVisits {
+    type: sum
+    sql:  ${TABLE}.visitcount ;;
+    filters: {
+      field: devicetype.name
+      value: "desktop"
+    }
+  }
+
+  measure: percent_DesktopVisits {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_DesktopVisits} / NULLIF(${count_TotalVisits},0) ;;
+  }
+
+  measure: count_BotVisits {
+    type: sum
+    sql:  ${TABLE}.visitcount ;;
+    filters: {
+      field: iscrawler
+      value: "yes"
+    }
+  }
+
+  measure: percent_BotVisits {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_BotVisits} / NULLIF(${count_TotalVisits},0) ;;
+
   }
 }
