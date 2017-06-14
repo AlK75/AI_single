@@ -74,7 +74,8 @@ view: lookermart_single {
   measure: percent_MobileVisits {
     type: number
     value_format: "#.00\%"
-    sql: 100.00 * ${count_MobileVisits} / NULLIF(${count_TotalVisits},0) ;;
+    sql: 100.00 * ${count_MobileVisits} / NULLIF(${count_TotalVisits},0)
+    description: "Mobile devices (mobile, smartphone, small screen, smartwatch) share of total traffic";;
   }
 
   measure: count_BotVisits {
@@ -84,12 +85,14 @@ view: lookermart_single {
       field: iscrawler
       value: "yes"
     }
+
   }
 
   measure: percent_BotVisits {
     type: number
     value_format: "#.00\%"
-    sql: 100.00 * ${count_BotVisits} / NULLIF(${count_TotalVisits},0) ;;
+    sql: 100.00 * ${count_BotVisits} / NULLIF(${count_TotalVisits},0)
+    description: "Source of web traffic that operates without human interaction, primarily for the purpose of indexing the response. Such sources are typically used by search engines, and can be referred to as crawlers, bots, robots or spiders, among other terms. This property can also refer to API calls that process websites to extract the structure data";;
 
   }
 
