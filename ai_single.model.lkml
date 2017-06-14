@@ -188,7 +188,68 @@ explore: Audience_single {
   }
 }
 
-explore: lookermart_single {}
+explore: lookermart_single {
+  join:  devicetype
+  {
+    type: left_outer
+    sql_on: ${lookermart_single.devicetype} = ${devicetype.id} ;;
+    relationship: many_to_one
+  }
+
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${lookermart_single.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
+
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
+
+  join:  daypart
+  {
+    type: inner
+    sql_on: ${lookermart_single.daypart} = ${daypart.id} ;;
+    relationship: many_to_one
+  }
+
+  join:  daysperiod
+  {
+    type: inner
+    sql_on: ${lookermart_single.daynum} = ${daysperiod.id} ;;
+    relationship: many_to_one
+  }
+
+  join:  b2cemail
+  {
+    type: left_outer
+    sql_on: ${lookermart_single.zip9} = ${b2cemail.zip9} ;;
+    relationship: many_to_one
+  }
+
+  join:  b2cfacebook
+  {
+    type: left_outer
+    sql_on: ${lookermart_single.zip9} = ${b2cfacebook.zip9} ;;
+    relationship: many_to_one
+  }
+
+  join:  b2cindividual
+  {
+    type: left_outer
+    sql_on: ${lookermart_single.zip9} = ${b2cindividual.zip9} ;;
+    relationship: many_to_one
+  }
+
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+}
 
 explore: pxcelclient {
 
@@ -201,3 +262,33 @@ explore: pxcelclient {
 }
 
 explore: zip9position {}
+
+explore: zipvisits_single
+{
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${zipvisits_single.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
+
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
+
+  join:  daysperiod
+  {
+    type: inner
+    sql_on: ${zipvisits_single.daynum} = ${daysperiod.id} ;;
+    relationship: many_to_one
+  }
+
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+
+}
