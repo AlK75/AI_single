@@ -43,15 +43,16 @@ view: beaconvisits_single {
   }
 
  measure: count_TotalVisits {
-
   type: sum
   sql:  ${TABLE}.visitcount ;;
+  html: <font size="7">{{rendered_value}}</font> ;;
 }
 
 
 measure: count_TotalBeaconUniqueDevices {
   type: sum
   sql:  ${TABLE}.beaconuniquedevices ;;
+  html: <font size="7">{{rendered_value}}</font> ;;
 }
 
 measure: count_MobileVisits {
@@ -99,4 +100,11 @@ measure: percent_BotVisits {
   sql: 100.00 * ${count_BotVisits} / NULLIF(${count_TotalVisits},0) ;;
 
 }
+
+  measure: percent_OtherVisits {
+    type: number
+    value_format: "#.00\%"
+    sql:100-( ${percent_BotVisits}+${percent_MobileVisits}+${percent_DesktopVisits}) ;;
+  }
+
 }
