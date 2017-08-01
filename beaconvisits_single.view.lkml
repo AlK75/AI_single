@@ -104,8 +104,8 @@ measure: percent_BotVisits {
   measure: percent_OtherVisits {
     type: number
     value_format: "#.00\%"
-    #  sql:100-( ${percent_BotVisits}+${percent_MobileVisits}+${percent_DesktopVisits}) ;;
-    sql:100.00 * (NULLIF(${count_TotalVisits},0) - ${count_BotVisits}  - ${count_MobileVisits} - ${count_DesktopVisits}) / NULLIF(${count_TotalVisits},0) ;;
+    sql:100-(${percent_MobileVisits}+${percent_DesktopVisits}) ;;
+    #  sql:100.00 * (NULLIF(${count_TotalVisits},0) - ${count_BotVisits}  - ${count_MobileVisits} - ${count_DesktopVisits}) / NULLIF(${count_TotalVisits},0) ;;
   }
 
 }
