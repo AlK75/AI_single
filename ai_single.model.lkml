@@ -322,3 +322,33 @@ explore: zip9map_single
   }
 
 }
+
+explore: demosummary_single
+{
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${demosummary_single.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
+
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
+
+  join:  daysperiod
+  {
+    type: inner
+    sql_on: ${demosummary_single.daynum} = ${daysperiod.id} ;;
+    relationship: many_to_one
+  }
+
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+
+}
