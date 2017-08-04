@@ -84,6 +84,6 @@ view: demosummary_single {
   measure: percent_Result {
     type: number
     value_format: "0.00\%"
-    sql: 100*({count_Result} - ${count_UsResult})/ NULLIF(${count_UsResult},0) ;;
+    sql: 100*(${count_Result} - ${count_UsResult})/ NULLIF(${count_UsResult},0) ;;
   }
 }
