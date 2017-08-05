@@ -4,6 +4,7 @@ view: demosummary_single {
   dimension: attribute {
     type: string
     sql: ${TABLE}.attribute ;;
+    html: <font size="2" color="#1f3e5a">{{ rendered_value }}</font> ;;
   }
 
   dimension: beaconid {
@@ -29,7 +30,7 @@ view: demosummary_single {
   measure: usd_format {
     type: sum
     hidden: yes
-    value_format: "$0"
+    value_format: "$#,##0"
     sql: ${TABLE}.result ;;
   }
 
@@ -64,13 +65,13 @@ view: demosummary_single {
     value_format: "0.00\%"
     sql:  ${TABLE}.result ;;
     html: {% if attribute._value contains "Age" %}
-    {{ age_format._rendered_value }}
+    <font size="2" color="#228b22">{{ age_format._rendered_value }}</font>
     {% elsif attribute._value contains "Size" %}
-    {{ hhs_format._rendered_value }}
+     <font size="2" color="#228b22">{{ hhs_format._rendered_value }}</font>
     {% elsif attribute._value contains "Income" or attribute._value contains "Value" %}
-    {{ usd_format._rendered_value }}
+     <font size="2" color="#228b22">{{ usd_format._rendered_value }}</font>
     {% else %}
-    {{ rendered_value }}
+     <font size="2" color="#228b22">{{ rendered_value }}</font>
     {% endif %}
     ;;
     required_fields: [age_format,hhs_format,usd_format]
@@ -79,11 +80,13 @@ view: demosummary_single {
   measure: count_UsResult {
     type: sum
     sql:  ${TABLE}.usresult ;;
+    html: <font size="2" color="#228b22">{{ rendered_value }}</font> ;;
   }
 
   measure: percent_Result {
     type: number
     value_format: "0.00\%"
     sql: 100*(${count_Result} - ${count_UsResult})/ NULLIF(${count_UsResult},0) ;;
+    html: <font size="2" color="#228b22">{{ rendered_value }}</font> ;;
   }
 }
