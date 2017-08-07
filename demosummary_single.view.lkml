@@ -85,6 +85,7 @@ view: demosummary_single {
 
   measure: percent_Result {
     type: number
+    hidden: yes
     value_format: "0.00\%"
     sql: 100*(${count_Result} - ${count_UsResult})/ NULLIF(${count_UsResult},0) ;;
     html: <font size="2" color="#228b22">{{ rendered_value }}</font> ;;
