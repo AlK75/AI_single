@@ -6,6 +6,8 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: awbeacon {}
+
 explore: b2cemail {}
 
 explore: b2cfacebook {}
@@ -13,18 +15,11 @@ explore: b2cfacebook {}
 explore: b2cindividual {}
 
 explore: beacondpuniquevisits_single {
-  join:  pxcelclient
+  join:  awbeacon
   {
     type: inner
-    sql_on: ${beacondpuniquevisits_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
+    sql_on: ${beacondpuniquevisits_single.beaconid} = ${awbeacon.beaconid} AND ${beacondpuniquevisits_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
   }
 
   join:  daypart
@@ -42,30 +37,23 @@ explore: beacondpuniquevisits_single {
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 }
 
 explore: beacondtuniquevisits_single {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${beacondtuniquevisits_single.beaconid} = ${awbeacon.beaconid} AND ${beacondtuniquevisits_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
+  }
+
   join:  devicetype
   {
     type: left_outer
     sql_on: ${beacondtuniquevisits_single.devicetype} = ${devicetype.id} ;;
-    relationship: many_to_one
-  }
-
-  join:  pxcelclient
-  {
-    type: inner
-    sql_on: ${beacondtuniquevisits_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
     relationship: many_to_one
   }
 
@@ -77,30 +65,23 @@ explore: beacondtuniquevisits_single {
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 }
 
 explore: beaconvisits_single {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${beaconvisits_single.beaconid} = ${awbeacon.beaconid} AND ${beaconvisits_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
+  }
+
   join:  devicetype
   {
     type: left_outer
     sql_on: ${beaconvisits_single.devicetype} = ${devicetype.id} ;;
-    relationship: many_to_one
-  }
-
-  join:  pxcelclient
-  {
-    type: inner
-    sql_on: ${beaconvisits_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
     relationship: many_to_one
   }
 
@@ -119,12 +100,19 @@ explore: beaconvisits_single {
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 }
 
 explore: beaconweeklyvisits_single {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${beaconweeklyvisits_single.beaconid} = ${awbeacon.beaconid} AND ${beaconweeklyvisits_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
+  }
+
   join:  devicetype
   {
     type: left_outer
@@ -132,27 +120,11 @@ explore: beaconweeklyvisits_single {
     relationship: many_to_one
   }
 
-  join:  pxcelclient
-  {
-    type: inner
-    sql_on: ${beaconweeklyvisits_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
-  }
-
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 }
-
-explore: client2lookeruser {}
 
 explore: daypart {}
 
@@ -161,18 +133,11 @@ explore: daysperiod {}
 explore: devicetype {}
 
 explore: Audience_single {
-  join:  pxcelclient
+   join:  awbeacon
   {
     type: inner
-    sql_on: ${Audience_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
+    sql_on: ${Audience_single.beaconid} = ${awbeacon.beaconid} AND ${Audience_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
   }
 
   join:  daysperiod
@@ -183,30 +148,23 @@ explore: Audience_single {
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 }
 
 explore: lookermart_single {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${lookermart_single.beaconid} = ${awbeacon.beaconid} AND ${lookermart_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
+  }
+
   join:  devicetype
   {
     type: left_outer
     sql_on: ${lookermart_single.devicetype} = ${devicetype.id} ;;
-    relationship: many_to_one
-  }
-
-  join:  pxcelclient
-  {
-    type: inner
-    sql_on: ${lookermart_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
     relationship: many_to_one
   }
 
@@ -246,18 +204,8 @@ explore: lookermart_single {
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
-  }
-}
-
-explore: pxcelclient {
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
   }
 }
 
@@ -265,18 +213,11 @@ explore: zip9position {}
 
 explore: zipvisits_single
 {
-  join:  pxcelclient
+  join:  awbeacon
   {
     type: inner
-    sql_on: ${zipvisits_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
+    sql_on: ${zipvisits_single.beaconid} = ${awbeacon.beaconid} AND ${zipvisits_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
   }
 
   join:  daysperiod
@@ -287,7 +228,7 @@ explore: zipvisits_single
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 
@@ -295,18 +236,11 @@ explore: zipvisits_single
 
 explore: zip9map_single
 {
-  join:  pxcelclient
+  join:  awbeacon
   {
     type: inner
-    sql_on: ${zip9map_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
+    sql_on: ${zip9map_single.beaconid} = ${awbeacon.beaconid} AND ${zip9map_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
   }
 
   join:  daysperiod
@@ -317,7 +251,7 @@ explore: zip9map_single
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 
@@ -325,18 +259,11 @@ explore: zip9map_single
 
 explore: demosummary_single
 {
-  join:  pxcelclient
+  join:  awbeacon
   {
     type: inner
-    sql_on: ${demosummary_single.beaconid} = ${pxcelclient.beaconid} ;;
-    relationship: many_to_one
-  }
-
-  join:  client2lookeruser
-  {
-    type: inner
-    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
-    relationship: many_to_one
+    sql_on: ${demosummary_single.beaconid} = ${awbeacon.beaconid} AND ${demosummary_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_many
   }
 
   join:  daysperiod
@@ -347,7 +274,7 @@ explore: demosummary_single
   }
 
   access_filter: {
-    field: client2lookeruser.userattribute
+    field: awbeacon.userattribute
     user_attribute: beacon2company
   }
 

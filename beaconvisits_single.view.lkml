@@ -34,7 +34,13 @@ view: beaconvisits_single {
   dimension: siteid {
     type: string
     sql: ${TABLE}.siteid ;;
-    suggest_persist_for: "1 minute"
+    suggest_persist_for: "60 minutes"
+  }
+
+  dimension: pageid {
+    type: string
+    sql: ${TABLE}.pageid ;;
+    suggest_persist_for: "60 minutes"
   }
 
   dimension: visitcount {
