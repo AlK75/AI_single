@@ -19,7 +19,7 @@ explore: beacondpuniquevisits_single {
   {
     type: inner
     sql_on: ${beacondpuniquevisits_single.beaconid} = ${awbeacon.beaconid} AND ${beacondpuniquevisits_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  daypart
@@ -47,7 +47,7 @@ explore: beacondtuniquevisits_single {
   {
     type: inner
     sql_on: ${beacondtuniquevisits_single.beaconid} = ${awbeacon.beaconid} AND ${beacondtuniquevisits_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  devicetype
@@ -75,7 +75,7 @@ explore: beaconvisits_single {
   {
     type: inner
     sql_on: ${beaconvisits_single.beaconid} = ${awbeacon.beaconid} AND ${beaconvisits_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  devicetype
@@ -110,7 +110,7 @@ explore: beaconweeklyvisits_single {
   {
     type: inner
     sql_on: ${beaconweeklyvisits_single.beaconid} = ${awbeacon.beaconid} AND ${beaconweeklyvisits_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  devicetype
@@ -137,7 +137,7 @@ explore: Audience_single {
   {
     type: inner
     sql_on: ${Audience_single.beaconid} = ${awbeacon.beaconid} AND ${Audience_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  daysperiod
@@ -158,7 +158,7 @@ explore: lookermart_single {
   {
     type: inner
     sql_on: ${lookermart_single.beaconid} = ${awbeacon.beaconid} AND ${lookermart_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  devicetype
@@ -217,7 +217,7 @@ explore: zipvisits_single
   {
     type: inner
     sql_on: ${zipvisits_single.beaconid} = ${awbeacon.beaconid} AND ${zipvisits_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  daysperiod
@@ -240,7 +240,7 @@ explore: zip9map_single
   {
     type: inner
     sql_on: ${zip9map_single.beaconid} = ${awbeacon.beaconid} AND ${zip9map_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  daysperiod
@@ -263,7 +263,7 @@ explore: demosummary_single
   {
     type: inner
     sql_on: ${demosummary_single.beaconid} = ${awbeacon.beaconid} AND ${demosummary_single.siteid} = ${awbeacon.siteid}  ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 
   join:  daysperiod
