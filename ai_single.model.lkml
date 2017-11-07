@@ -105,6 +105,20 @@ explore: beaconvisits_single {
   }
 }
 
+explore: beacondailyvisits_single {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${beacondailyvisits_single.beaconid} = ${awbeacon.beaconid} AND ${beacondailyvisits_single.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_one
+  }
+
+  access_filter: {
+    field: awbeacon.userattribute
+    user_attribute: beacon2company
+  }
+}
+
 explore: beaconweeklyvisits_single {
   join:  awbeacon
   {
